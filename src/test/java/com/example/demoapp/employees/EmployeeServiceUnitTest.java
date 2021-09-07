@@ -39,7 +39,7 @@ public class EmployeeServiceUnitTest {
         //act
         EmployeeService employeeService = new EmployeeService(employeeRepository);
         try {
-            EmployeeResponse res = employeeService.getEmployeeById(id);
+            employeeService.getEmployeeById(id);
             fail();
         }catch(EmployeeNotFoundException e){
             //pass
@@ -56,9 +56,7 @@ public class EmployeeServiceUnitTest {
         when(employeeRepository.findById(id)).thenReturn(Optional.empty());
         //act
         EmployeeService employeeService = new EmployeeService(employeeRepository);
-       Exception exception = assertThrows(EmployeeNotFoundException.class,()->{
-           employeeService.getEmployeeById(id);
-       });
+       Exception exception = assertThrows(EmployeeNotFoundException.class,()-> employeeService.getEmployeeById(id));
        assertEquals("Employee not found id="+id,exception.getMessage());
     }
 }
