@@ -15,6 +15,9 @@ public class EmployeeControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private  EmployeeRepository employeeRepository;
+
     @Test
     public void listEmployee() {
         //Act
@@ -25,9 +28,14 @@ public class EmployeeControllerTest {
     }
 
     @Test
-    public void getEmp(){
+    public void getEmpById(){
+//        arrange
+        int id=1;
+        Employee emp01 = new Employee();
+        emp01.setName("Kongpop");
+        employeeRepository.save(emp01);
 //        act
-        EmployeeResponse emp = restTemplate.getForObject("/employee/1",EmployeeResponse.class);
+        EmployeeResponse emp = restTemplate.getForObject("/employee/"+id,EmployeeResponse.class);
 //        assert
         assertEquals("Kongpop",emp.getName());
 
