@@ -1,54 +1,38 @@
 package com.example.demoapp.employees;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
-public class EmployeeControllerTest {
+public class EmployeeControllerServiceTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Autowired
+    @MockBean
     private  EmployeeRepository employeeRepository;
 
-//    @BeforeEach
-//    public void initDataForTest(){
-//        Employee emp01 = new Employee();
-//        emp01.setName("Kongpop");
-//        employeeRepository.save(emp01);
-//    }
-
-    @AfterEach
-    public void deleteDataForTest(){
-        employeeRepository.deleteAll();
-    }
 
     @Test
-    public void listEmployee() {
-        //Act
-        EmployeeResponse emp[] =  restTemplate.getForObject("/employees",EmployeeResponse[].class);
-
-        //Assert
-        assertEquals(2,emp.length);
-    }
-
-    @Test
+    @DisplayName("Success case")
     public void getEmpById(){
 //        arrange
         int id=1;
-
-        Employee emp01 = new Employee();
-        emp01.setName("Kongpop");
-        employeeRepository.save(emp01);
+        Employee emp1 = new Employee();
+        emp1.setId(1);
+        emp1.setName("Kongpop");
+        when(employeeRepository.findById(1)).thenReturn(Optional.of(emp1));
 //        act
         EmployeeResponse emp = restTemplate.getForObject("/employee/"+id,EmployeeResponse.class);
 //        assert
