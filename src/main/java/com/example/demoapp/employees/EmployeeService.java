@@ -11,6 +11,10 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
     public EmployeeResponse getEmployeeById(int id) {
 //        EmployeeResponse response = new EmployeeResponse();
 //        response.setId(id);

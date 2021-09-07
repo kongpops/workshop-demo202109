@@ -67,6 +67,7 @@ public class EmployeeControllerServiceTest {
 //        assert
         assertEquals(404,result.getStatusCodeValue());
         assertEquals(404,result.getBody().getCode());
+        assertEquals("Employee not found id="+id,result.getBody().getDetail());
 
     }
 }
