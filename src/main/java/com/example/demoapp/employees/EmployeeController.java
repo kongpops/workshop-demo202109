@@ -26,7 +26,9 @@ public class EmployeeController {
     public EmployeeResponse geyEmployeeById(@PathVariable(name ="id") String id){
 //        Vailidate input
 //        Cleaning data
-        EmployeeResponse emp01 = employeeService.getEmployeeById(Integer.parseInt(id));
-        return emp01;
+            //success
+            EmployeeResponse emp01 = employeeService.getEmployeeById(Integer.parseInt(id));
+            return emp01;
+
     }
 }
