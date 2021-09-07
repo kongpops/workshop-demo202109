@@ -37,7 +37,7 @@ public class EmployeeControllerWebMVCTest {
         ObjectMapper mapper = new ObjectMapper();
         EmployeeResponse response = mapper.readValue(json,EmployeeResponse.class);
         assertEquals(id , response.getId());
-        assertEquals("Kongpop",response.getName());
+        assertEquals("Mockname",response.getName());
 
     }
 }
